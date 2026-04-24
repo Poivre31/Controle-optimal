@@ -72,28 +72,28 @@ include CMakeFiles/cpp_tests.dir/flags.make
 CMakeFiles/cpp_tests.dir/codegen:
 .PHONY : CMakeFiles/cpp_tests.dir/codegen
 
-CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o: CMakeFiles/cpp_tests.dir/flags.make
-CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o: /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_1.cpp
-CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o: CMakeFiles/cpp_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o"
-	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o -MF CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o.d -o CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o -c /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_1.cpp
+CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o: CMakeFiles/cpp_tests.dir/flags.make
+CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o: /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_drag.cpp
+CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o: CMakeFiles/cpp_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o -MF CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o.d -o CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o -c /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_drag.cpp
 
-CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.i"
-	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_1.cpp > CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.i
+CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_drag.cpp > CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.i
 
-CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.s"
-	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_1.cpp -o CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.s
+CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_drag.cpp -o CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.s
 
 # Object files for target cpp_tests
 cpp_tests_OBJECTS = \
-"CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o"
+"CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o"
 
 # External object files for target cpp_tests
 cpp_tests_EXTERNAL_OBJECTS =
 
-cpp_tests: CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o
+cpp_tests: CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o
 cpp_tests: CMakeFiles/cpp_tests.dir/build.make
 cpp_tests: CMakeFiles/cpp_tests.dir/compiler_depend.ts
 cpp_tests: liboptiToolsLib.a

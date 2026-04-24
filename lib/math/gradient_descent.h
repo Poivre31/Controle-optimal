@@ -3,6 +3,9 @@
 #include "gradient.h"
 #include <Eigen/Core>
 #include <fmt/format.h>
+#include "ogm1.h"
+#include "momentum_descent.h"
+#include "lma.h"
 
 template <size_t N, coordinates<N> target>
 double L2_loss(coordinates<N> X)

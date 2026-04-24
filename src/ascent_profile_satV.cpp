@@ -138,6 +138,7 @@ int main()
     double runtime = duration_cast<milliseconds>(t2 - t1).count();
     fmt::println("Runtime: {}ms", runtime);
     fmt::println("Final height: {:.1f}m, velocity: ({:.1f}, {:.1f})m/s, time: {:.1f}s", parse(result, Z).back(), parse(result, Vx).back(), parse(result, Vz).back(), time.back());
+    fmt::println("Final horizontal distance: {:.1f}km", parse(result, X).back() / 1000);
 
     if (true)
     {

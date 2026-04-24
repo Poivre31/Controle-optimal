@@ -7,9 +7,9 @@
 },
 {
   "directory": "/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build",
-  "command": "/usr/bin/g++-14 -DMATPLOT_BUILD_HIGH_RESOLUTION_WORLD_MAP -DNOMINMAX -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/lib -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/extern -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/_deps/fmt-src/include -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/extern/matplotplusplus/source -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/extern/matplotplusplus/source/matplot -O3 -march=native -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o -c /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_1.cpp",
-  "file": "/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_1.cpp",
-  "output": "CMakeFiles/cpp_tests.dir/src/ascent_profile_1.cpp.o"
+  "command": "/usr/bin/g++-14 -DMATPLOT_BUILD_HIGH_RESOLUTION_WORLD_MAP -DNOMINMAX -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/lib -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/extern -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/_deps/fmt-src/include -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/extern/matplotplusplus/source -I/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/extern/matplotplusplus/source/matplot -O3 -march=native -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o -c /home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_drag.cpp",
+  "file": "/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/src/ascent_profile_drag.cpp",
+  "output": "CMakeFiles/cpp_tests.dir/src/ascent_profile_drag.cpp.o"
 },
 {
   "directory": "/home/poivre31/Documents/VsCodeProjects/OptimalControl/OptiTools/build/_deps/fmt-build",
