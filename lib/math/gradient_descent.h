@@ -3,7 +3,6 @@
 #include "gradient.h"
 #include <Eigen/Core>
 #include <fmt/format.h>
-#include "ogm1.h"
 #include "momentum_descent.h"
 #include "lma.h"
 
