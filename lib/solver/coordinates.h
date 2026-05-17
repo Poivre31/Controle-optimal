@@ -14,6 +14,16 @@ using polar = coordinates<2>;
 using cyl = coordinates<3>;
 using sph = coordinates<3>;
 
+double sign(double x)
+{
+    if (x > 0)
+        return 1;
+    else if (x == 0)
+        return 0;
+    else
+        return -1;
+}
+
 vec3 dim_2_to_dim_3(vec2 v)
 {
     return {v[0], v[1], 0.};
