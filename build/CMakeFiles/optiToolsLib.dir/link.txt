@@ -1,2 +1,0 @@
-/usr/bin/ar qc liboptiToolsLib.a CMakeFiles/optiToolsLib.dir/lib/solver/euler.cpp.o
-/usr/bin/ranlib liboptiToolsLib.a
