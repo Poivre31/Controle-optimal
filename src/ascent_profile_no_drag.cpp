@@ -6,47 +6,14 @@
 #include <chrono>
 #include <iostream>
 
-using namespace std::chrono;
-
-namespace plt = matplot;
-
-using state = coordinates<7>;
-using parameters = coordinates<3>;
-
-enum
-{
-    X,
-    Z,
-    Vx,
-    Vz,
-    λ2,
-    λ3,
-    λ4
-};
-
-enum
-{
-    λ2_0,
-    λ3_0,
-    λ4_0
-};
-
-#include <solver/coordinates.h>
-#include <solver/solver.h>
-#include <math/gradient_descent.h>
-#include <matplot/matplot.h>
-#include <functional>
-#include <chrono>
-#include <iostream>
-
 /// PROBLEM CONDITIONS
 
 double dt = 0.01;
 double g = 9.81;
 
 double target_altitude = 185000;
-size_t max_steps = 10000;
-double target_precision = 1e-10;
+size_t max_steps = 1000;
+double target_precision = 1e-15;
 
 double isp = 3000;
 double Mf = 140000; ///> Initial mass of the rocket
@@ -56,18 +23,26 @@ double thrust = 1.54 * g * Mi; ///> Thrust (here initial TWR of 2)
 double A = thrust / isp;       ///> Fuel consumption rate (here with an ISP of 3000m/s)
 double tf = (Mi - Mf) / A;     ///> Burn time
 
-double Cd = 20;
-double H = 8000;
+/// PRO
 
-double η(double z, double m)
-{
-    return Cd * exp(-z / H) / m;
-}
+using namespace std::chrono;
+namespace plt = matplot;
 
-double dηdz(double z, double m)
+using state = coordinates<4>; ///> We define our state vector...
+enum
 {
-    return -η(z, m) / H;
-}
+    X,
+    Z,
+    Vx,
+    Vz,
+};
+
+using parameters = coordinates<2>; ///> And our parameters
+enum
+{
+    C1,
+    C2,
+};
 
 /// @brief Here we define the evolution function of our state variables X,Y,Vx,Vz according to Newton's 2nd law, using the
 /// current estimate of the parameters c.
@@ -75,41 +50,19 @@ state dsdt(double t, state state_i, parameters c)
 {
 
     state state_change;
+
     double M = Mi - t * A;
 
-    double vx = state_i[Vx];
-    double vz = state_i[Vz];
-    double v = sqrt(vx * vx + vz * vz);
-    double z = state_i[Z];
-
     double α = M_PI_2;
-    if (state_i[λ4] != 0)
-        α = atan(state_i[λ3] / state_i[λ4]);
+    if (c[C2] != t)
+        α = atan(c[C1] / (c[C2] - t));
     if (α < 0)
         α += M_PI;
-    if (std::isnan(α))
-    {
-        std::cout << state_i << std::endl;
-        exit(1);
-    }
 
-    state_change[X] = vx;
-    state_change[Z] = vz;
-    state_change[Vx] = thrust / M * sin(α) - η(z, M) * vx * v;
-    state_change[Vz] = thrust / M * cos(α) - η(z, M) * vz * v - g;
-
-    if (v != 0)
-    {
-        state_change[λ2] = dηdz(z, M) * v * (state_i[λ3] * vx + state_i[λ4] * vz);
-        state_change[λ3] = η(z, M) * v * (state_i[λ3] * (1 + vx * vx / (v * v)) + state_i[λ4] * vx * vz / (v * v));
-        state_change[λ4] = -state_i[λ2] + η(z, M) * v * (state_i[λ4] * (1 + vz * vz / (v * v)) + state_i[λ3] * vx * vz / (v * v));
-    }
-    else
-    {
-        state_change[λ2] = 0;
-        state_change[λ3] = 0;
-        state_change[λ4] = -state_i[λ2];
-    }
+    state_change[X] = state_i[Vx];
+    state_change[Z] = state_i[Vz];
+    state_change[Vx] = thrust / M * sin(α);
+    state_change[Vz] = thrust / M * cos(α) - g;
 
     return state_change;
 }
@@ -118,9 +71,7 @@ state dsdt(double t, state state_i, parameters c)
 /// @return A vector containing all the intermediate states.
 std::vector<state> propagate(solver_degree_I<state> &solver, parameters c)
 {
-    state X0 = {0., 0., 0., 0., c[λ2_0], c[λ3_0], c[λ4_0]};
-
-    solver.set_initial_state(0, X0);
+    solver.set_initial_state(0, {0., 0., 0., 0.});
     solver.set_timestep(dt);
     solver.solve_RK4(tf, [c](double t, state state_i)
                      { return dsdt(t, state_i, c); });
@@ -138,7 +89,7 @@ int main()
 
     solver_degree_I<state> solver;
 
-    parameters c = {1., 12., 60.};
+    parameters c = {1, tf};
 
     auto loss = [&solver](parameters c)
     {
@@ -147,7 +98,7 @@ int main()
         return loss;
     };
 
-    c = gradient_descent_BB<3>(c, loss, max_steps, target_precision, 100);
+    c = gradient_descent_BB<2>(c, loss, max_steps, target_precision, 100);
 
     auto result = stride(solver.get_positions(), 100); ///> To only visualise a portion of the points, reduces load on matplot
     auto time = stride(solver.get_timeline(tf), 100);
@@ -165,22 +116,17 @@ int main()
         plt::plot(parse(result, X), parse(result, Z));
         plt::title("Trajectoire Z(X)");
 
-        // plt::subplot(2, 2, 1);
-        // plt::plot(time, apply_element_wise<double, double>(time, [c](double t)
-        //                                                    {
-        //         double α = M_PI_2;
-        //         if (c[λ4] != 0)
-        //             α = atan(c[λ3] / c[λ4]);
-        //         if (α < 0)
-        //             α += M_PI;
-        //         if (std::isnan(α))
-        //         {
-        //             std::cout << c << std::endl;
-        //             exit(1);
-        //         }
-        //     return α; }));
+        plt::subplot(2, 2, 1);
+        plt::plot(time, apply_element_wise<double, double>(time, [c](double t)
+                                                           {
+            double α = M_PI_2;
+            if (c[C2] != t)
+                α = atan(c[C1] / (c[C2] - t));
+            if (α < 0)
+                α += M_PI;
+            return α; }));
 
-        // plt::title("Angle α(t)");
+        plt::title("Angle α(t)");
 
         plt::subplot(2, 2, 2);
         plt::plot(time, parse(result, Z));
